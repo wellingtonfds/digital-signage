@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+
+  app:
+    image: "node:8"
+    working_dir: /home/node/app
+    volumes:
+      - ./back-end/:/home/node/app
+    # ports:
+    #   - "8080:3333"
+    command: "npm start"
+  front:
+    image: "nginx"
+    volumes : 
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./front-end/dist/front-end:/usr/share/nginx/html
+    ports:
+      - "80:80"  
