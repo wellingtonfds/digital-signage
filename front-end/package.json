@@ -19,7 +19,6 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
-    "@fortawesome/angular-fontawesome": "^0.3.0",
     "@ng-bootstrap/ng-bootstrap": "^4.2.2",
     "bootstrap": "^4.4.1",
     "bootswatch": "^4.4.1",
