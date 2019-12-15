@@ -1,16 +1,9 @@
 import {Deserializable} from './deserializable.model';
 
-export class User implements Deserializable {
-
+export class EcommerceModelType implements Deserializable {
   public id: number;
 
-  public email: string;
-
-  public password: string;
-
-  public createdAt: Date;
-
-  public updatedAt: Date;
+  public name: string;
 
   deserialize(input: any): this {
     return Object.assign(this, input);
