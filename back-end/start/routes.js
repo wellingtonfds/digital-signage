@@ -18,6 +18,14 @@ const Route = use('Route')
 
 //Route.on('/').render('welcome')
 
+
+
 Route.get('/', function(){
   return 'test';
 })
+
+
+Route.group(() => {
+  Route.post('login', 'AuthController.login')
+  Route.post('register', 'AuthController.register')
+}).prefix('auth');
