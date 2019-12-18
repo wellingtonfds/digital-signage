@@ -19,13 +19,13 @@ const Route = use('Route')
 //Route.on('/').render('welcome')
 
 
-
-Route.get('/', function(){
-  return 'test';
-})
-
-
 Route.group(() => {
+  Route.get('/', function(){
+    return 'Hello API';
+  })
+
   Route.post('login', 'AuthController.login')
   Route.post('register', 'AuthController.register')
-}).prefix('auth');
+}).prefix('api');
+
+
