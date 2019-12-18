@@ -5,15 +5,16 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 import * as auth from "@adonisjs/auth/src/Schemes/Api";
-import {User} from "../../../../front-end/src/app/models/user.model";
+import User from "../../Models/User";
 
 /**
  * Resourceful controller for interacting with auths
  */
 class AuthController {
+
   /**
    * Authenticates an user.
-   * POST auth/login
+   * POST api/login
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -32,7 +33,7 @@ class AuthController {
 
   /**
    * Registers a new user
-   * POST auth/register
+   * POST api/register
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -41,7 +42,10 @@ class AuthController {
    */
   async register ({ request, response, view }) {
     const user = new User();
+    const Hash = use('Hash');
+
     user.fill(request.all());
+    user.password = await Hash.make(request.input('password'));
 
     try {
       user.save();
