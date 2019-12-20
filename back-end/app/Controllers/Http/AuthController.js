@@ -2,10 +2,9 @@
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
+/** @typedef {import('@adonisjs/auth/src/Auth')} Auth */
 
-import * as auth from "@adonisjs/auth/src/Schemes/Api";
-import User from "../../Models/User";
+ import User from "../../Models/User";
 
 /**
  * Resourceful controller for interacting with auths
@@ -18,11 +17,11 @@ class AuthController {
    *
    * @param {object} ctx
    * @param {Request} ctx.request
+   * @param {Auth} ctx.auth
    * @param {Response} ctx.response
-   * @param {View} ctx.view
    */
-  async login ({ request, response, view }) {
-    const { email, password } = request.all()
+  async login ({ request, auth, response }) {
+    const { email, password } = request.all();
 
     try {
       return await auth.attempt(email, password);
@@ -38,18 +37,12 @@ class AuthController {
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
-   * @param {View} ctx.view
    */
-  async register ({ request, response, view }) {
-    const user = new User();
-    const Hash = use('Hash');
+  async register ({ request, response }) {
 
-    user.fill(request.all());
-    user.password = await Hash.make(request.input('password'));
+    const user = await User.create(request.all());
 
     try {
-      user.save();
-
       return {user};
     } catch (e) {
       return {error: {code: 422, message: 'Could not create user'}}
