@@ -6,7 +6,7 @@ services:
     working_dir: /home/node/app
     volumes:
       - ./back-end/:/home/node/app
-    command: "npm start"
+    command: "npm run nodemon"
   front:
     image: "nginx"
     volumes : 
