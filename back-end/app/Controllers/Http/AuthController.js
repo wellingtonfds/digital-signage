@@ -2,10 +2,9 @@
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
+/** @typedef {import('@adonisjs/auth/src/Auth')} Auth */
 
-import * as auth from "@adonisjs/auth/src/Schemes/Api";
-import User from "../../Models/User";
+ import User from "../../Models/User";
 
 // const {validate} = use('Validator')
 
@@ -20,11 +19,16 @@ class AuthController {
    *
    * @param {object} ctx
    * @param {Request} ctx.request
+   * @param {Auth} ctx.auth
    * @param {Response} ctx.response
-   * @param {View} ctx.view
    */
+<<<<<<< HEAD
   async login({request, response, view}) {
     const {email, password} = request.all()
+=======
+  async login ({ request, auth, response }) {
+    const { email, password } = request.all();
+>>>>>>> c1790555c862ab87a3b56f55cabb5447572221d7
 
     try {
       return await auth.attempt(email, password);
@@ -40,8 +44,8 @@ class AuthController {
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
-   * @param {View} ctx.view
    */
+<<<<<<< HEAD
   async register({request, response, view}) {
     const user = new User();
     const Hash = use('Hash');
@@ -60,6 +64,17 @@ class AuthController {
     // } catch (e) {
     //   return {error: {code: 422, message: 'Could not create user'}}
     // }
+=======
+  async register ({ request, response }) {
+
+    const user = await User.create(request.all());
+
+    try {
+      return {user};
+    } catch (e) {
+      return {error: {code: 422, message: 'Could not create user'}}
+    }
+>>>>>>> c1790555c862ab87a3b56f55cabb5447572221d7
 
   }
 }
